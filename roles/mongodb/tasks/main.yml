@@ -1,0 +1,31 @@
+#dnf install mongodb-org -y
+
+#
+#sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+#
+#systemctl enable mongod
+#systemctl restart mongod
+
+
+- name: copy mongo repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: install mongodb-org
+  ansible.builtin.dnf:
+    name: mongodb-org
+    state: installed
+
+- name: update listners
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+
+- name: systemd setup mongodb
+  ansible.builtin.systemd_service:
+    state: restarted
+    name: mongodb-org
+    enabled: true
