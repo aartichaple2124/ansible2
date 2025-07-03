@@ -26,6 +26,6 @@
 
 - name: systemd setup mongodb
   ansible.builtin.systemd_service:
+    name: mongod
     state: restarted
-    name: mongodb-org
     enabled: true
