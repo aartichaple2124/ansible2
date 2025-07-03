@@ -1,0 +1,33 @@
+dnf module disable nodejs -y
+dnf module enable nodejs:20 -y
+dnf install nodejs -y
+
+APP_PREREQ
+npm install
+
+SYSTEMD
+
+- name: disable node default version
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: enable nodejs default version
+  ansible.builtin.shell: dnf module enable nodejs:20 -y
+
+- name: install nodejs
+  ansible.builtin.dnf:
+    name: nodejs
+    state: installed
+
+- name: include app_prereq
+  ansible.builtin.tasks:
+    file: app-prereq.yml
+
+- name: Installnpm dependencies
+  community.general.npm:
+    path: /app
+
+- name: include systemd
+  ansible.builtin.tasks:
+    file: systemd.yml
+
+
