@@ -7,7 +7,7 @@
 
 - name: Install nginx 1.24 version
   ansible.builtin.dnf:
-    name: nginx:1.24
+    name: nginx
     state: installed
 
 - name: Copy ngnix.conf
