@@ -2,8 +2,8 @@
 
 - name: include role nodejs
   ansible.builtin.include_role:
-  name: nodejs
-  tasks_from: common
+    name: nodejs
+    tasks_from: common
 
 - name: copy mongo.repo
   ansible.builtin.copy:
