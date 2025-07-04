@@ -1,15 +1,22 @@
-#source ./commom.sh
-#app_name=catalogue
-#
-#NODEJS
-#
-#
-#cp mongo.repo /etc/yum.repos.d/mongo.repo
-#
-#
-#
-#
-#dnf install mongodb-mongosh -y
-#
-#mongosh --host mongodb.learntechnology.shop </app/db/master-data.js
 
+
+- name: include role nodejs
+  ansible.builtin.include_role:
+  name: nodejs
+  tasks_from: common
+
+- name: copy mongo.repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: Install Mongo client
+  ansible.builtin.dnf:
+    name: mongodb-mongosh
+    state: installed
+
+- name: Load Master Data
+  community.mongodb.mongodb_shell:
+    login_host: mongodb-{{ ENV }}.azdevopsb82.online
+    file: "/app/db/master-data.js"
+    idempotent: yes

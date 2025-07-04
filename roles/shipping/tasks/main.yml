@@ -1,0 +1,47 @@
+#source ./common.sh
+#app_name=shipping
+#
+#JAVA
+#
+#mysql -h mysql.learntechnology.shop -uroot -pRoboShop@1 < /app/db/schema.sql
+#mysql -h mysql.learntechnology.shop -uroot -pRoboShop@1 < /app/db/app-user.sql
+#mysql -h mysql.learntechnology.shop -uroot -pRoboShop@1 < /app/db/master-data.sql
+
+- name: include java role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: java.yml
+
+- name: Install MySQL Client
+  ansible.builtin.dnf:
+    name:
+      - mysql
+      - python3-mysqlclient
+    state: installed
+
+- name: Tload schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/db/schema.sql
+    login_host:
+    login_user: root
+    login_password: RoboShop@1
+
+- name: Tload schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/db/app-user.sql
+    login_host:
+    login_user: root
+    login_password: RoboShop@1
+
+- name: To load schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/db/master-data.sql
+    login_host:
+    login_user: root
+    login_password: RoboShop@1

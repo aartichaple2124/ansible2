@@ -1,0 +1,5 @@
+
+- name: include nodejs role
+  ansible.builtin.role:
+    name: common
+    tasks_from: nodejs.yml
