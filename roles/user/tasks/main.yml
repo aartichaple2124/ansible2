@@ -1,11 +1,6 @@
-#source ./commom.sh
-#app_name=user
-#
-#NODEJS
-
 
 - name: include nodejs role
-  ansible.builtin.role:
+  ansible.builtin.include_role:
     name: common
     tasks_from: nodejs.yml
 
