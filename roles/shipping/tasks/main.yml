@@ -1,11 +1,3 @@
-#source ./common.sh
-#app_name=shipping
-#
-#JAVA
-#
-#mysql -h mysql.learntechnology.shop -uroot -pRoboShop@1 < /app/db/schema.sql
-#mysql -h mysql.learntechnology.shop -uroot -pRoboShop@1 < /app/db/app-user.sql
-#mysql -h mysql.learntechnology.shop -uroot -pRoboShop@1 < /app/db/master-data.sql
 
 - name: include java role
   ansible.builtin.include_role:
@@ -24,7 +16,7 @@
     state: import
     name: all
     target: /app/db/schema.sql
-    login_host:
+    login_host: 10.0.0.11
     login_user: root
     login_password: RoboShop@1
 
@@ -33,7 +25,7 @@
     state: import
     name: all
     target: /app/db/app-user.sql
-    login_host:
+    login_host: 10.0.0.11
     login_user: root
     login_password: RoboShop@1
 
@@ -42,6 +34,6 @@
     state: import
     name: all
     target: /app/db/master-data.sql
-    login_host:
+    login_host: 10.0.0.11
     login_user: root
     login_password: RoboShop@1
