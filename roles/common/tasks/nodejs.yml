@@ -19,7 +19,7 @@
     path: /app
 
 - name: include systemd
-  ansible.builtin.tasks:
+  ansible.builtin.include_tasks:
     file: systemd.yml
 
 
